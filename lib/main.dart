@@ -235,13 +235,18 @@ class BerandaPage extends StatelessWidget {
                     UCardList(),
                   ],
                 )
-              : GridView.count(
-                  crossAxisCount: 2,
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
+              : Column(
+                  mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    UCardGrid(),
-                    UCardGrid(),
+                    GridView.count(
+                      crossAxisCount: 2,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      children: <Widget>[
+                        UCardGrid(),
+                        UCardGrid(),
+                      ],
+                    ),
                   ],
                 ),
           SizedBox(height: 30),
@@ -430,76 +435,74 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 29, 24, 45),
-        body: SafeArea(
-          top: true,
-          left: false,
-          right: false,
-          bottom: false,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 50),
-            child: Center(
-              child: ListView(
-                children: <Widget>[
-                  SizedBox(height: 100),
-                  Text(
-                    "Selamat Datang!",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: 20),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    "Silahkan Masuk",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        fontSize: 30),
-                    textAlign: TextAlign.center,
-                  ),
-                  Center(
-                    child: Image.asset("assets/images/login.png"),
-                  ),
-                  SizedBox(height: 10),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "NIM/NIP/USU's Email",
-                      filled: true,
-                      fillColor: Color.fromARGB(255, 230, 230, 230),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Password",
-                      filled: true,
-                      fillColor: Color.fromARGB(255, 230, 230, 230),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.red,
-                      onPrimary: Colors.white,
-                    ),
-                    onPressed: () {
-                      _pushTo(context, MainPage());
-                    },
-                    child: Text('Masuk'),
-                  ),
-                  SizedBox(height: 30),
-                ],
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Text(
+                "Selamat Datang!",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 25),
+                textAlign: TextAlign.center,
               ),
-            ),
+              SizedBox(height: 10),
+              Text(
+                "Silahkan Masuk",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 35),
+                textAlign: TextAlign.center,
+              ),
+              Center(
+                child: Image.asset("assets/images/login.png"),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 50, right: 50, top: 10),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "NIM/NIP/USU's Email",
+                    filled: true,
+                    fillColor: Color.fromARGB(255, 230, 230, 230),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 50, right: 50, top: 10),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Password",
+                    filled: true,
+                    fillColor: Color.fromARGB(255, 230, 230, 230),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 50, right: 50, top: 10),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
+                    onPrimary: Colors.white,
+                    minimumSize: Size.fromHeight(50),
+                  ),
+                  onPressed: () {
+                    _pushTo(context, MainPage());
+                  },
+                  child: Text('Masuk'),
+                ),
+              ),
+            ],
           ),
         ));
   }
@@ -509,14 +512,15 @@ class UCardGrid extends StatelessWidget {
   const UCardGrid({super.key});
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
+      width: double.infinity,
       child: Card(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Center(
-              child: Image.asset('assets/images/book.png'),
+            Image.asset(
+              'assets/images/book.png',
             ),
             Text(
               "Demo Title",
