@@ -1,8 +1,18 @@
+import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 
 int _selectedIndex = 0;
 bool _selectedMode = false;
+List<String> tags = [];
+List<String> options = [
+  'Buku Ajar',
+  'Prosiding',
+  'Jurnal',
+  'Buku Panduan',
+];
+
 void main() => runApp(MyApp());
 
 _pushTo(BuildContext context, Widget screen) {
@@ -76,18 +86,15 @@ class _MainPage extends State<MainPage> {
               }),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: _selectedIndex == 0
-            ? BerandaPage()
-            : _selectedIndex == 1
-                ? FavoritPage()
-                : _selectedIndex == 2
-                    ? BacaanPage()
-                    : _selectedIndex == 3
-                        ? ProfilPage()
-                        : null,
-      ),
+      body: _selectedIndex == 0
+          ? BerandaPage()
+          : _selectedIndex == 1
+              ? FavoritPage()
+              : _selectedIndex == 2
+                  ? BacaanPage()
+                  : _selectedIndex == 3
+                      ? ProfilPage()
+                      : null,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
@@ -151,105 +158,77 @@ class BerandaPage extends StatelessWidget {
     return Center(
       child: ListView(
         children: <Widget>[
-          SizedBox(height: 30),
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: "Pencarian",
-              filled: true,
-              fillColor: Color.fromARGB(255, 230, 230, 230),
-              prefixIcon: Icon(
-                Icons.search,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide.none,
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: "Pencarian",
+                filled: true,
+                fillColor: Color.fromARGB(255, 230, 230, 230),
+                prefixIcon: Icon(
+                  Icons.search,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide.none,
+                ),
               ),
             ),
           ),
-          SizedBox(height: 30),
-          Text(
-            "Kategori",
-            style: TextStyle(fontWeight: FontWeight.bold),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+            child: Text(
+              "Kategori",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
-                    onPrimary: Colors.white,
-                  ),
-                  onPressed: () {},
-                  child: Text('Buku Ajar'),
-                ),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+            child: ChipsChoice<String>.multiple(
+              value: tags,
+              onChanged: (val) => (),
+              choiceItems: C2Choice.listFrom<String, String>(
+                source: options,
+                value: (i, v) => v,
+                label: (i, v) => v,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
-                    onPrimary: Colors.white,
-                  ),
-                  onPressed: () {},
-                  child: Text('Proceeding'),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
-                    onPrimary: Colors.white,
-                  ),
-                  onPressed: () {},
-                  child: Text('Jurnal'),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
-                    onPrimary: Colors.white,
-                  ),
-                  onPressed: () {},
-                  child: Text('Buku Panduan'),
-                ),
-              ),
-            ],
+            ),
           ),
-          SizedBox(height: 30),
-          Text(
-            "Buku Ajar",
-            style: TextStyle(fontWeight: FontWeight.bold),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+            child: Text(
+              "Buku Ajar",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
-          SizedBox(height: 10),
-          _selectedMode
-              ? Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    UCardList(),
-                    UCardList(),
-                  ],
-                )
-              : Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    GridView.count(
-                      crossAxisCount: 2,
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      children: <Widget>[
-                        UCardGrid(),
-                        UCardGrid(),
-                      ],
-                    ),
-                  ],
-                ),
-          SizedBox(height: 30),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            child: _selectedMode
+                ? Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      UCardList(),
+                      UCardList(),
+                    ],
+                  )
+                : Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      LayoutGrid(
+                        columnSizes: [auto, auto],
+                        rowSizes: [auto, auto],
+                        rowGap: 20,
+                        columnGap: 5,
+                        children: <Widget>[
+                          UCardGrid(),
+                          UCardGrid(),
+                          UCardGrid(),
+                          UCardGrid(),
+                        ],
+                      ),
+                    ],
+                  ),
+          ),
         ],
       ),
     );
@@ -263,40 +242,46 @@ class FavoritPage extends StatelessWidget {
     return Center(
       child: ListView(
         children: <Widget>[
-          SizedBox(height: 30),
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: "Pencarian",
-              filled: true,
-              fillColor: Color.fromARGB(255, 230, 230, 230),
-              prefixIcon: Icon(
-                Icons.search,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide.none,
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: "Pencarian",
+                filled: true,
+                fillColor: Color.fromARGB(255, 230, 230, 230),
+                prefixIcon: Icon(
+                  Icons.search,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide.none,
+                ),
               ),
             ),
           ),
-          SizedBox(height: 30),
-          _selectedMode
-              ? Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    UCardList(),
-                    UCardList(),
-                  ],
-                )
-              : GridView.count(
-                  crossAxisCount: 2,
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  children: <Widget>[
-                    UCardGrid(),
-                    UCardGrid(),
-                  ],
-                ),
-          SizedBox(height: 30),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            child: _selectedMode
+                ? Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      UCardList(),
+                      UCardList(),
+                    ],
+                  )
+                : LayoutGrid(
+                    columnSizes: [auto, auto],
+                    rowSizes: [auto, auto],
+                    rowGap: 20,
+                    columnGap: 10,
+                    children: <Widget>[
+                      UCardGrid(),
+                      UCardGrid(),
+                      UCardGrid(),
+                      UCardGrid(),
+                    ],
+                  ),
+          ),
         ],
       ),
     );
@@ -310,40 +295,46 @@ class BacaanPage extends StatelessWidget {
     return Center(
       child: ListView(
         children: <Widget>[
-          SizedBox(height: 30),
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: "Pencarian",
-              filled: true,
-              fillColor: Color.fromARGB(255, 230, 230, 230),
-              prefixIcon: Icon(
-                Icons.search,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide.none,
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: "Pencarian",
+                filled: true,
+                fillColor: Color.fromARGB(255, 230, 230, 230),
+                prefixIcon: Icon(
+                  Icons.search,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide.none,
+                ),
               ),
             ),
           ),
-          SizedBox(height: 30),
-          _selectedMode
-              ? Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    UCardList(),
-                    UCardList(),
-                  ],
-                )
-              : GridView.count(
-                  crossAxisCount: 2,
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  children: <Widget>[
-                    UCardGrid(),
-                    UCardGrid(),
-                  ],
-                ),
-          SizedBox(height: 30),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            child: _selectedMode
+                ? Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      UCardList(),
+                      UCardList(),
+                    ],
+                  )
+                : LayoutGrid(
+                    columnSizes: [auto, auto],
+                    rowSizes: [auto, auto],
+                    rowGap: 20,
+                    columnGap: 10,
+                    children: <Widget>[
+                      UCardGrid(),
+                      UCardGrid(),
+                      UCardGrid(),
+                      UCardGrid(),
+                    ],
+                  ),
+          ),
         ],
       ),
     );
@@ -357,73 +348,80 @@ class ProfilPage extends StatelessWidget {
     return Center(
       child: ListView(
         children: <Widget>[
-          SizedBox(height: 30),
-          Center(
-            child: Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    leading: Image.asset('assets/images/avatar.png'),
-                    title: Text(
-                      "Abbas Adam Az Zuhri",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            child: Center(
+              child: Card(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      leading: Image.asset('assets/images/avatar.png'),
+                      title: Text(
+                        "Abbas Adam Az Zuhri",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text("abbasadamazzuhri@usu.ac.id"),
                     ),
-                    subtitle: Text("abbasadamazzuhri@usu.ac.id"),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-          SizedBox(height: 30),
-          Center(
-            child: Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    title: Text(
-                      "Tentang",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+            child: Center(
+              child: Card(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      title: Text(
+                        "Tentang",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-          SizedBox(height: 5),
-          Center(
-            child: Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    title: Text(
-                      "Bantuan",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+            child: Center(
+              child: Card(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      title: Text(
+                        "Bantuan",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-          SizedBox(height: 5),
-          Center(
-            child: Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ListTile(
-                    title: Text(
-                      "Keluar",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+            child: Center(
+              child: Card(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      title: Text(
+                        "Keluar",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-          SizedBox(height: 30),
         ],
       ),
     );
@@ -523,7 +521,7 @@ class UCardGrid extends StatelessWidget {
               'assets/images/book.png',
             ),
             Text(
-              "Demo Title",
+              "Demo Titles",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ],
