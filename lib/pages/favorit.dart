@@ -1,3 +1,4 @@
+import 'package:buku_el_usu/pages/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 
@@ -83,26 +84,35 @@ class UCardGrid extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Card(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Image.asset(
-                'assets/images/book.png',
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: const Expanded(
-                child: Text(
-                  "Demo Titles",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+        child: InkWell(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const DetailPage();
+            }));
+          },
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: Image.asset(
+                  'assets/images/book.png',
                 ),
               ),
-            ),
-          ],
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: const Expanded(
+                  child: Text(
+                    "Demo Titles",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -116,22 +126,29 @@ class UCardList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ListTile(
-              leading: Image.asset('assets/images/book.png'),
-              title: const Expanded(
-                child: Text(
-                  "Demo Title",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+        child: InkWell(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const DetailPage();
+            }));
+          },
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: Image.asset('assets/images/book.png'),
+                title: const Expanded(
+                  child: Text(
+                    "Demo Title",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                subtitle: const Expanded(
+                  child: Text('This is a simple card in Flutter.'),
                 ),
               ),
-              subtitle: const Expanded(
-                child: Text('This is a simple card in Flutter.'),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
