@@ -1,9 +1,16 @@
-import 'package:buku_el_usu/main.dart';
 import 'package:buku_el_usu/pages/viewer.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({super.key});
+  const DetailPage(
+      {super.key,
+      required this.name,
+      required this.picture,
+      required this.gender});
+
+  final String name;
+  final String picture;
+  final String gender;
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +21,9 @@ class DetailPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Container(
-                decoration: BoxDecoration(color: Colors.red),
-                padding: EdgeInsets.symmetric(vertical: 50, horizontal: 0),
+                decoration: const BoxDecoration(color: Colors.red),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 50, horizontal: 0),
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -66,15 +74,15 @@ class DetailPage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 40, horizontal: 20),
                         child: Center(
-                          child: Image.asset("assets/images/book.png"),
+                          child: Image.network(picture),
                         ),
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 0, horizontal: 0),
-                        child: const Text(
-                          "Buku Log Pendidikan Klinik",
-                          style: TextStyle(
+                        child: Text(
+                          name,
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Color.fromARGB(255, 255, 255, 255),
                               fontSize: 20),
@@ -84,10 +92,10 @@ class DetailPage extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 0),
-                        child: const Expanded(
+                        child: Expanded(
                           child: Text(
-                            "Buku Log Pendidikan Klinik",
-                            style: TextStyle(
+                            name,
+                            style: const TextStyle(
                                 fontWeight: FontWeight.normal,
                                 color: Color.fromARGB(255, 255, 255, 255),
                                 fontSize: 15),
@@ -98,13 +106,13 @@ class DetailPage extends StatelessWidget {
                       Container(
                           padding: const EdgeInsets.symmetric(
                               vertical: 20, horizontal: 20),
-                          child: const Wrap(
+                          child: Wrap(
                             spacing: 50,
                             runSpacing: 10,
                             children: <Widget>[
                               Column(
                                 children: <Widget>[
-                                  Text(
+                                  const Text(
                                     "Bahasa",
                                     style: TextStyle(
                                         fontWeight: FontWeight.normal,
@@ -114,8 +122,8 @@ class DetailPage extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                   ),
                                   Text(
-                                    "Bahasa Indonesia",
-                                    style: TextStyle(
+                                    gender,
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color:
                                             Color.fromARGB(255, 255, 255, 255),
@@ -124,7 +132,7 @@ class DetailPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Column(
+                              const Column(
                                 children: <Widget>[
                                   Text(
                                     "Halaman",

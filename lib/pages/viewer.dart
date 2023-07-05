@@ -1,64 +1,85 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-class ViewerPage extends StatelessWidget {
+class ViewerPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Home'),
-        ),
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      MyPdfViewer(pdfPath: 'assets/example.pdf'),
-                ),
-              );
-            },
-            child: Text('View PDF'),
-          ),
-        ),
-      ),
-    );
+  _HomePage createState() => _HomePage();
+}
+
+class _HomePage extends State<ViewerPage> {
+  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
   }
-}
 
-class MyPdfViewer extends StatefulWidget {
-  final String pdfPath;
-  MyPdfViewer({required this.pdfPath});
-  @override
-  _MyPdfViewerState createState() => _MyPdfViewerState();
-}
-
-class _MyPdfViewerState extends State<MyPdfViewer> {
-  late PDFViewController pdfViewController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("My PDF Document"),
-      ),
-      body: PDFView(
-        filePath: widget.pdfPath,
-        autoSpacing: true,
-        enableSwipe: true,
-        pageSnap: true,
-        swipeHorizontal: true,
-        onError: (error) {
-          print(error);
-        },
-        onPageError: (page, error) {
-          print('$page: ${error.toString()}');
-        },
-        onViewCreated: (PDFViewController vc) {
-          pdfViewController = vc;
-        },
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 0),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 20),
+                        child: Wrap(
+                          spacing: 200,
+                          runSpacing: 10,
+                          children: <Widget>[
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                IconButton(
+                                    icon: const Icon(
+                                      Icons.arrow_back_ios,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context, true);
+                                    }),
+                              ],
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                IconButton(
+                                    icon: const Icon(
+                                      Icons.search_off_outlined,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context, true);
+                                    }),
+                              ],
+                            )
+                          ],
+                        )),
+                    Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 40, horizontal: 20),
+                        child: Center(
+                            child: SfPdfViewer.network(
+                                'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
+                                canShowScrollHead: false,
+                                canShowScrollStatus: false))),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
