@@ -1,6 +1,7 @@
 import 'package:buku_el_usu/pages/bacaan.dart';
 import 'package:buku_el_usu/pages/beranda.dart';
 import 'package:buku_el_usu/pages/favorit.dart';
+import 'package:buku_el_usu/pages/login.dart';
 import 'package:buku_el_usu/pages/profil.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Buku Elektronik USU',
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+      home: LoginPage(),
     );
   }
 }
@@ -78,7 +79,12 @@ class _MainPage extends State<MainPage> {
             : null,
         actions: <Widget>[
           IconButton(
-              icon: Image.asset("assets/images/avatar.png"), onPressed: () {}),
+              icon: Image.asset("assets/images/avatar.png"),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const LoginPage();
+                }));
+              }),
         ],
       ),
       body: IndexedStack(

@@ -1,3 +1,4 @@
+import 'package:buku_el_usu/main.dart';
 import 'package:buku_el_usu/pages/beranda.dart';
 import 'package:flutter/material.dart';
 
@@ -83,10 +84,10 @@ class LoginPage extends StatelessWidget {
                     minimumSize: const Size.fromHeight(50),
                   ),
                   onPressed: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) {
-                    //   return const BerandaPage(title: 'Beranda');
-                    // }));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const MainPage();
+                    }));
                   },
                   child: const Text('Masuk'),
                 ),
