@@ -1,4 +1,4 @@
-# buku_el_usu
+# buku-elektronik
 
 A new Flutter project.
 
