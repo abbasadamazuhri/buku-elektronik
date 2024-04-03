@@ -1,6 +1,6 @@
-import 'package:buku_el_usu/components/grid.dart';
-import 'package:buku_el_usu/components/list.dart';
-import 'package:buku_el_usu/services/api.dart';
+import 'package:flutter_ebook/components/grid.dart';
+import 'package:flutter_ebook/components/list.dart';
+import 'package:flutter_ebook/services/api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 

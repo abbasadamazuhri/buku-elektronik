@@ -1,8 +1,8 @@
-import 'package:buku_el_usu/pages/bacaan.dart';
-import 'package:buku_el_usu/pages/beranda.dart';
-import 'package:buku_el_usu/pages/favorit.dart';
-import 'package:buku_el_usu/pages/login.dart';
-import 'package:buku_el_usu/pages/profil.dart';
+import 'package:flutter_ebook/pages/bacaan.dart';
+import 'package:flutter_ebook/pages/beranda.dart';
+import 'package:flutter_ebook/pages/favorit.dart';
+import 'package:flutter_ebook/pages/login.dart';
+import 'package:flutter_ebook/pages/profil.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());

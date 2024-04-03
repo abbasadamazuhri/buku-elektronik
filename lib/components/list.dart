@@ -1,4 +1,4 @@
-import 'package:buku_el_usu/pages/detail.dart';
+import 'package:flutter_ebook/pages/detail.dart';
 import 'package:flutter/material.dart';
 
 class UCardList extends StatelessWidget {

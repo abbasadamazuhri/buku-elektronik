@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:buku_el_usu/models/user.dart';
+import 'package:flutter_ebook/models/user.dart';
 
 Future<List<User>> getRequest() async {
   String url = "https://randomuser.me/api/?results=5";

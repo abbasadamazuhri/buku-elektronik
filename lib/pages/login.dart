@@ -1,4 +1,4 @@
-import 'package:buku_el_usu/main.dart';
+import 'package:flutter_ebook/main.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {

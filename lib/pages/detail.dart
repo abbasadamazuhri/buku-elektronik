@@ -1,5 +1,5 @@
-import 'package:buku_el_usu/main.dart';
-import 'package:buku_el_usu/pages/viewer.dart';
+import 'package:flutter_ebook/main.dart';
+import 'package:flutter_ebook/pages/viewer.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
